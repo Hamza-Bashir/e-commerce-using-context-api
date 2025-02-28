@@ -1,7 +1,9 @@
-import Button from "@/components/ui/Button"; // Ensure the path matches your structure
-
 function App() {
-  return <Button variant="outline">Button</Button>;
+  return (
+    <>
+      <h1>Hello World</h1>
+    </>
+  );
 }
 
 export default App;
