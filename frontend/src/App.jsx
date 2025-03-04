@@ -1,8 +1,23 @@
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Applayout from "./components/Layout/Applayout";
+
+import {Routes, Router, Route} from "react-router-dom"
+
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
-    </>
+      
+        <Routes>
+          <Route path="/" element={<Applayout/>}>
+          
+            <Route path="about" element={<About/>} />
+            <Route path="contact" element={<Contact/>}/>
+          
+          </Route>
+        </Routes>
+      
+      </>
   );
 }
 
