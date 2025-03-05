@@ -1,8 +1,9 @@
-import About from "./components/About";
-import Contact from "./components/Contact";
 import Applayout from "./components/Layout/Applayout";
-
-import {Routes, Router, Route} from "react-router-dom"
+import Category from "./components/Category";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import ErrorPage from "./components/errorPage";
+import {Routes,  Route} from "react-router-dom"
 
 function App() {
   return (
@@ -11,10 +12,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Applayout/>}>
           
-            <Route path="about" element={<About/>} />
-            <Route path="contact" element={<Contact/>}/>
-          
+            <Route path="category" element={<Category/>} />
+            <Route path="register" element={<Register/>} />
+            <Route path="login" element={<Login/>} />
+            <Route path="*" element={<ErrorPage/>}/>
           </Route>
+          
         </Routes>
       
       </>

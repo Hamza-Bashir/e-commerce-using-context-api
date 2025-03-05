@@ -1,13 +1,22 @@
-import Home from "../Home"
-import {Outlet} from "react-router-dom"
+import Header from "../Header";
+import Footer from "../Footer";
+import { Outlet } from "react-router-dom";
 
+function Applayout() {
+  return (
+    <div className="flex flex-col min-h-screen">
+      
+      <Header />
 
+     
+      <main className="flex-grow">
+        <Outlet />
+      </main>
 
-function Applayout(){
-    return <>
-    <Home/>
-    <Outlet/>
-    </>
+    
+      <Footer />
+    </div>
+  );
 }
 
-export default Applayout
+export default Applayout;
