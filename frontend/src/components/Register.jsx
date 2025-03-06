@@ -1,14 +1,39 @@
 import { useState } from "react";
+import axios from "axios";
+import {toast} from "react-toastify"
+import { useNavigate } from "react-router-dom";
+
 
 function Register() {
     const [name,setName] = useState("")
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")
-    const [phone,setPhone] = useState("")
+    const [phoneNumber,setPhoneNumber] = useState("")
     const [address,setAddress] = useState("")
-    const handleSubmit = (e)=>{
+
+   const navigate = useNavigate()
+    const handleSubmit = async (e)=>{
         e.preventDefault()
-        console.log(name, email, password, phone, address)
+
+        const userData = {name,email,password,phoneNumber,address}
+        try {
+          const response = await axios.post("http://localhost:3000/register", userData)
+
+        toast.success(response.data.message, {position:"top-left"})
+        navigate("/login")
+
+        
+        } catch (error) {
+          
+            const errorMsg = error.response.data.message
+            toast.error(errorMsg, {position:"top-left"})
+          
+        }
+        setName("")
+        setEmail("")
+        setPassword("")
+        setPhoneNumber("")
+        setAddress("")
     }
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -61,8 +86,8 @@ function Register() {
               <input 
                 id="phone"
                 type="text" 
-                value={phone}
-                onChange={(e)=>setPhone(e.target.value)}
+                value={phoneNumber}
+                onChange={(e)=>setPhoneNumber(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
                 placeholder="Enter your phone number"
               />
