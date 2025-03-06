@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import {toast} from "react-toastify"
+import { useAuth } from "@/context/Auth";
 
 
 
 function Login(){
+
+  const {auth, setAuth} = useAuth()
 
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -20,6 +23,9 @@ function Login(){
             toast.success(response.data.message, {
                 position:"top-left"
             })
+
+            localStorage.setItem("token", response.data.token)
+            setAuth({...auth, token:response.data.token})
         } catch (error) {
          toast.error(error.response.data.message, {
             position:"top-left"
