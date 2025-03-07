@@ -5,7 +5,8 @@ import Login from "./components/Login";
 import ErrorPage from "./components/errorPage";
 import {Routes,  Route} from "react-router-dom"
 import Home from "./components/Home";
-
+import Dashboard  from "./components/Dashboard";
+import Forget from "./components/Forget";
 function App() {
   return (
     <>
@@ -13,9 +14,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Applayout/>}>
           <Route path="/" element={<Home/>} />
+          <Route path="dashboard" element={<Dashboard/>} />
             <Route path="category" element={<Category/>} />
             <Route path="register" element={<Register/>} />
             <Route path="login" element={<Login/>} />
+            <Route path="forget" element={<Forget/>} />
             <Route path="*" element={<ErrorPage/>}/>
           </Route>
           

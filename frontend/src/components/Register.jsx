@@ -10,12 +10,13 @@ function Register() {
     const [password,setPassword] = useState("")
     const [phoneNumber,setPhoneNumber] = useState("")
     const [address,setAddress] = useState("")
+    const [answer, setAnswer] = useState("")
 
    const navigate = useNavigate()
     const handleSubmit = async (e)=>{
         e.preventDefault()
 
-        const userData = {name,email,password,phoneNumber,address}
+        const userData = {name,email,password,phoneNumber,address, answer}
         try {
           const response = await axios.post("http://localhost:3000/register", userData)
 
@@ -27,13 +28,15 @@ function Register() {
           
             const errorMsg = error.response.data.message
             toast.error(errorMsg, {position:"top-left"})
+            setName("")
+          setEmail("")
+          setPassword("")
+          setPhoneNumber("")
+          setAddress("")
+          setAnswer("")
           
         }
-        setName("")
-        setEmail("")
-        setPassword("")
-        setPhoneNumber("")
-        setAddress("")
+        
     }
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -103,6 +106,18 @@ function Register() {
                 onChange={(e)=>setAddress(e.target.value )}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
                 placeholder="Enter your address"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="address" className="block mb-2 text-lg font-medium">Question</label>
+              <input 
+                id="address"
+                type="text" 
+                value={answer}
+                onChange={(e)=>setAnswer(e.target.value )}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                placeholder="Enter your favourite sports"
               />
             </div>
   
