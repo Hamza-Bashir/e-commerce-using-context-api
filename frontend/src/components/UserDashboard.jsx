@@ -1,19 +1,26 @@
 import { useAuth } from "@/context/Auth"
 import { useState } from "react"
+import Spinner from "./Spinner"
 
 
-function Dashboard(){
+function UserDashboard(){
     const {auth, setAuth} = useAuth()
 
     const [ok, setOk] = useState(false)
+
+    if(!auth.user){
+        return <>
+        <Spinner/>
+        </>
+    }
     return <>
-    {auth.token ? (
+    {auth.user.role === 0 ? (
         <h1>DashBoard</h1>
     ):(
-        <h1>Spinner</h1>
+        <Spinner/>
     )}
     
     </>
 }
 
-export default Dashboard
+export default UserDashboard

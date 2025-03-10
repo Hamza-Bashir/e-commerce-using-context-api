@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useAuth } from "@/context/Auth";
 
 function Login() {
+
+  const location = useLocation()
 
   const {auth, setAuth} = useAuth()
   const [email, setEmail] = useState("");
@@ -19,9 +21,12 @@ function Login() {
     try {
       const response = await axios.post("http://localhost:3000/login", userData);
       toast.success(response.data.message, { position: "top-left" });
-      navigate("/"); 
+      navigate(location.state || "/"); 
       localStorage.setItem("token", response.data.token )
-      setAuth({...auth, token:response.data.token})
+      localStorage.setItem("user", JSON.stringify(response.data.existingUser))
+      
+
+      setAuth({...auth, token:response.data.token, user:response.data.existingUser})
     } catch (error) {
       const errorMsg = error.response?.data?.message || "Something went wrong";
       toast.error(errorMsg, { position: "top-left" });

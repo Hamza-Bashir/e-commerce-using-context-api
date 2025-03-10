@@ -9,7 +9,7 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setAuth({ token: "" });
+    setAuth({ token: "" , user:null});
   };
 
   const toggleDropdown = () => {
@@ -51,13 +51,17 @@ function Header() {
                   className="flex items-center gap-2 transition duration-300 cursor-pointer hover:text-yellow-400"
                   onClick={toggleDropdown}
                 >
-                  User
+                  {auth.user.role === 0 ? (
+                    <h1>user</h1>
+                  ):(
+                    <h1>admin</h1>
+                  )}
                   <ChevronDownIcon className="w-5 h-5" />
                 </button>
                 {/* Conditionally render the Dropdown Menu */}
                 {dropdownOpen && (
                   <div className="absolute right-0 z-10 w-48 mt-2 text-black bg-white rounded-lg shadow-lg">
-                    <Link to="/dashboard">
+                    <Link to={`dashboard/${auth.user.role === 0 ? 'user' : 'admin'}`}>
                       <li className="px-4 py-2 cursor-pointer hover:bg-gray-200">Dashboard</li>
                     </Link>
                     <Link to="/" onClick={handleLogout}>
